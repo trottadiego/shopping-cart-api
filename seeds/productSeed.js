@@ -87,6 +87,20 @@ const seedProducts = async () => {
       image:
         "https://images.pexels.com/photos/16947163/pexels-photo-16947163/free-photo-of-acostado-nike-anuncio-naturaleza-muerta.jpeg?auto=compress&cs=tinysrgb&w=600",
     },
+    {
+      name: "Zapatilla Nike 11",
+      price: 2000.0,
+      stock: 30,
+      image:
+        "https://images.pexels.com/photos/9244882/pexels-photo-9244882.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    },
+    {
+      name: "Zapatilla Nike 12",
+      price: 2500.99,
+      stock: 25,
+      image:
+        "https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    },
   ];
 
   try {
