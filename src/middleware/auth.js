@@ -6,13 +6,12 @@ const auth = (req, res, next) => {
   if (!token) {
     return res.status(401).json({ msg: "Token is not defined" });
   }
-
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     req.user = decoded.user;
     next();
   } catch (e) {
-    res.status(400).json({ msg: "Invalid token" });
+    res.status(401).json({ msg: "Invalid token" });
   }
 };
 

@@ -1,4 +1,5 @@
 const Cart = require("../models/Cart");
+const Shipping = require("../models/Shipping");
 
 const getCart = async (req, res) => {
   try {
@@ -16,30 +17,48 @@ const addToCart = async (req, res) => {
 
   try {
     let cart = await Cart.findOne({ id_user: req.user.id });
+
     if (!cart) {
-      cart = new Cart({ id_user: req.user.id, products: [] });
+      const cheapestShipping = await Shipping.findOne()
+        .sort({ price: 1 })
+        .limit(1);
+
+      if (!cheapestShipping) {
+        return res
+          .status(500)
+          .json({ message: "No shipping methods available" });
+      }
+
+      cart = new Cart({
+        id_user: req.user.id,
+        products: [],
+        id_shipping: cheapestShipping._id,
+      });
     }
 
     const productIndex = cart.products.findIndex(
       (p) => p.product_id.toString() === product_id
     );
+
     if (productIndex > -1) {
       return res
         .status(400)
         .json({ message: "The product is already in the cart" });
     }
-    cart.products.push({ product_id, quantity });
 
+    cart.products.push({ product_id, quantity });
     await cart.save();
     await cart.populate("products.product_id");
+
     res.json(cart);
   } catch (error) {
+    console.error("Error adding product to cart:", error);
     res.status(500).send(error.message);
   }
 };
 
 const updateCart = async (req, res) => {
-  const { product_id, quantity } = req.body;
+  const { product_id, quantity, id_shipping } = req.body;
 
   try {
     let cart = await Cart.findOne({ id_user: req.user.id });
@@ -59,6 +78,10 @@ const updateCart = async (req, res) => {
       }
     } else {
       return res.status(404).json({ message: "Product not found in cart" });
+    }
+
+    if (id_shipping) {
+      cart.id_shipping = id_shipping;
     }
 
     await cart.save();
@@ -82,6 +105,11 @@ const removeFromCart = async (req, res) => {
     cart.products = cart.products.filter(
       (p) => p.product_id.toString() !== product_id
     );
+
+    if (cart.products.length === 0) {
+      await Cart.deleteOne({ id_user: req.user.id });
+      return res.json({ message: "Cart has been removed" });
+    }
 
     await cart.save();
     await cart.populate("products.product_id");

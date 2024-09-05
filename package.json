@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node ./index.js",
-    "seedP": "node ./seeds/productSeed.js"
+    "seedP": "node ./seeds/productSeed.js",
+    "seedS": "node ./seeds/shippingsSeed.js"
   },
   "keywords": [],
   "author": "",
