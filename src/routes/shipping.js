@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const {
-  getSippings,
+  getShippings,
   addShipping,
 } = require("../controllers/shippingController");
 
-router.get("/", getSippings);
+router.get("/", getShippings);
 router.post("/add", addShipping);
 
 module.exports = router;

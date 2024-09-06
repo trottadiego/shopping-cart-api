@@ -1,9 +1,9 @@
-const Shipping = require("../models/Shipping");
+const shippingService = require("../services/shippingService");
 
-const getSippings = async (req, res) => {
+const getShippings = async (req, res) => {
   try {
-    const products = await Shipping.find();
-    res.status(200).json(products);
+    const shippings = await shippingService.findAllShippings();
+    res.status(200).json(shippings);
   } catch (error) {
     res.status(500).send(error.message);
   }
@@ -12,13 +12,15 @@ const getSippings = async (req, res) => {
 const addShipping = async (req, res) => {
   const { type, price, description } = req.body;
   try {
-    const newShipping = new Shipping({ type, price, description });
-    await newShipping.save();
+    const newShipping = await shippingService.createShipping(
+      type,
+      price,
+      description
+    );
     res.status(201).json(newShipping);
   } catch (error) {
-    res.status(500);
     res.status(500).send(error.message);
   }
 };
 
-module.exports = { getSippings, addShipping };
+module.exports = { getShippings, addShipping };
