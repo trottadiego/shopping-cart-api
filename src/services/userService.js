@@ -1,14 +1,15 @@
-const User = require("../models/User");
+const User = require('../models/User');
 
-class UserService {
-  static async findByUsername(user) {
-    return User.findOne({ user });
-  }
+const findUserByUsername = async (username) => {
+  return User.findOne({ user: username });
+};
 
-  static async createUser(userData) {
-    const newUser = new User(userData);
-    return newUser.save();
-  }
-}
+const createUser = async (userData) => {
+  const newUser = new User(userData);
+  return newUser.save();
+};
 
-module.exports = UserService;
+module.exports = {
+  findUserByUsername,
+  createUser,
+};

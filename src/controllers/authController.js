@@ -1,4 +1,4 @@
-const authService = require("../services/authService");
+const authService = require('../services/authService');
 
 const register = async (req, res) => {
   const { user, password } = req.body;
@@ -6,10 +6,10 @@ const register = async (req, res) => {
   try {
     const userExist = await authService.findUserByUsername(user);
     if (userExist) {
-      return res.status(400).json({ msg: "User already exists" });
+      return res.status(400).json({ msg: 'User already exists' });
     }
 
-    const newUser = await authService.createUser(user, password);
+    const newUser = await authService.createUser({ user, password });
     const token = authService.generateToken(newUser.id);
 
     res.json({ token });
@@ -24,16 +24,12 @@ const login = async (req, res) => {
   try {
     const userExist = await authService.findUserByUsername(user);
     if (!userExist) {
-      return res.status(400).json({ msg: "Invalid credentials" });
+      return res.status(400).json({ msg: 'Invalid credentials' });
     }
 
-    const isMatch = await authService.comparePasswords(
-      password,
-      userExist.password
-    );
-
+    const isMatch = await authService.comparePasswords(password, userExist.password);
     if (!isMatch) {
-      return res.status(400).json({ msg: "Invalid credentials" });
+      return res.status(400).json({ msg: 'Invalid credentials' });
     }
 
     const token = authService.generateToken(userExist.id);
