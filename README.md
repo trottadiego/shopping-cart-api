@@ -48,7 +48,7 @@ npm run seed
 
 ## Para crear un usuario ejecutar el siguiente curl:
 
-curl -X POST http://localhost:5000/api/auth/register \
+curl -X POST http://localhost:3000/api/auth/register \
 -H "Content-Type: application/json" \
 -d '{
 "user": "meli",
@@ -59,11 +59,11 @@ curl -X POST http://localhost:5000/api/auth/register \
 
 ## Obtener Productos
 
-curl -X GET http://localhost:5000/api/products
+curl -X GET http://localhost:3000/api/products
 
 ## Agregar un Producto
 
-curl -X POST http://localhost:5000/api/products/add \
+curl -X POST http://localhost:3000/api/products/add \
  -H "Content-Type: application/json" \
  -d '{
 "name": "New Product",
@@ -74,19 +74,19 @@ curl -X POST http://localhost:5000/api/products/add \
 
 ## Actualizar los Stocks de Productos
 
-curl -X PUT http://localhost:5000/api/products/update-stocks \
+curl -X PUT http://localhost:3000/api/products/update-stocks \
  -H "Content-Type: application/json" \
  -H "x-auth-token: YOUR_JWT_TOKEN" \
  -d '{}'
 
 ## Obtener el Carrito
 
-curl -X GET http://localhost:5000/api/cart \
+curl -X GET http://localhost:3000/api/cart \
  -H "x-auth-token: YOUR_JWT_TOKEN"
 
 ## Agregar un Producto al Carrito
 
-curl -X POST http://localhost:5000/api/cart/add \
+curl -X POST http://localhost:3000/api/cart/add \
  -H "Content-Type: application/json" \
  -H "x-auth-token: YOUR_JWT_TOKEN" \
  -d '{
@@ -96,7 +96,7 @@ curl -X POST http://localhost:5000/api/cart/add \
 
 ## Actualizar un Producto en el Carrito
 
-curl -X PUT http://localhost:5000/api/cart/update \
+curl -X PUT http://localhost:3000/api/cart/update \
  -H "Content-Type: application/json" \
  -H "x-auth-token: YOUR_JWT_TOKEN" \
  -d '{
@@ -107,7 +107,7 @@ curl -X PUT http://localhost:5000/api/cart/update \
 
 ## Eliminar un Producto del Carrito
 
-curl -X DELETE http://localhost:5000/api/cart/remove \
+curl -X DELETE http://localhost:3000/api/cart/remove \
  -H "Content-Type: application/json" \
  -H "x-auth-token: YOUR_JWT_TOKEN" \
  -d '{
@@ -116,11 +116,11 @@ curl -X DELETE http://localhost:5000/api/cart/remove \
 
 ## Obtener Métodos de Envío
 
-curl -X GET http://localhost:5000/api/shipping
+curl -X GET http://localhost:3000/api/shipping
 
 ## Agregar un Nuevo Método de Envío
 
-curl -X POST http://localhost:5000/api/shipping/add \
+curl -X POST http://localhost:3000/api/shipping/add \
  -H "Content-Type: application/json" \
  -d '{
 "type": "Standard Shipping",
@@ -130,7 +130,7 @@ curl -X POST http://localhost:5000/api/shipping/add \
 
 ## Registrar un Nuevo Usuario
 
-curl -X POST http://localhost:5000/api/auth/register \
+curl -X POST http://localhost:3000/api/auth/register \
  -H "Content-Type: application/json" \
  -d '{
 "user": "newUser",
@@ -139,7 +139,7 @@ curl -X POST http://localhost:5000/api/auth/register \
 
 ## Iniciar Sesión (Login)
 
-curl -X POST http://localhost:5000/api/auth/login \
+curl -X POST http://localhost:3000/api/auth/login \
  -H "Content-Type: application/json" \
  -d '{
 "user": "existingUser",

@@ -10,5 +10,5 @@ COPY . .
 
 EXPOSE 3000
 
-CMD ["sh", "-c", "npm start"]
-
+# CMD ["sh", "-c", "npm start"]
+CMD ["npm", "start"]
