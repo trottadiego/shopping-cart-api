@@ -4,8 +4,8 @@ const findUserByUsername = async (username) => {
   return User.findOne({ user: username });
 };
 
-const createUser = async (userData) => {
-  const newUser = new User(userData);
+const createUser = async (user, password) => {
+  const newUser = new User(user, password);
   return newUser.save();
 };
 

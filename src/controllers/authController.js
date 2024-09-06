@@ -9,7 +9,7 @@ const register = async (req, res) => {
       return res.status(400).json({ msg: 'User already exists' });
     }
 
-    const newUser = await authService.createUser({ user, password });
+    const newUser = await authService.createUser(user, password);
     const token = authService.generateToken(newUser.id);
 
     res.json({ token });
