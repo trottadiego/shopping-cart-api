@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node ./index.js",
     "seedP": "node ./seeds/productSeed.js",
-    "seedS": "node ./seeds/shippingsSeed.js"
+    "seedS": "node ./seeds/shippingsSeed.js",
+    "seed": "npm run seedP && npm run seedS"
   },
   "keywords": [],
   "author": "",

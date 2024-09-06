@@ -1,4 +1,5 @@
 const Product = require("../models/Product");
+const Cart = require("../models/Cart");
 
 const getProducts = async (req, res) => {
   try {
@@ -21,4 +22,30 @@ const addProduct = async (req, res) => {
   }
 };
 
-module.exports = { getProducts, addProduct };
+const updateProductStocks = async (req, res) => {
+  try {
+    let cart = await Cart.findOne({ id_user: req.user.id });
+    if (!cart) {
+      return res.status(404).json({ message: "Cart not found" });
+    }
+    if (!Array.isArray(cart.products) || cart.products.length === 0) {
+      return res.status(400).send("No products in the cart");
+    }
+    const updatePromises = cart.products.map((item) => {
+      const { product_id, quantity } = item;
+      return Product.findByIdAndUpdate(
+        product_id._id,
+        { $inc: { stock: -quantity } },
+        { new: true }
+      );
+    });
+    await Promise.all(updatePromises);
+    await Cart.deleteOne({ id_user: req.user.id });
+    res.status(200).json({ message: "Product stocks updated successfully" });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send(error.message);
+  }
+};
+
+module.exports = { getProducts, addProduct, updateProductStocks };
