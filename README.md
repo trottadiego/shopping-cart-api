@@ -14,7 +14,7 @@
 
 ## Clona el repositorio:
 
-[git clone https://github.com/usuario/shopping-cart-api.git](https://github.com/trottadiego/shopping-cart-api.git)
+git clone https://github.com/trottadiego/shopping-cart-api.git
 
 ## Navega al directorio del proyecto:
 
